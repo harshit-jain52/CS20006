@@ -31,7 +31,7 @@ public:
     VectorDataset(const VectorDataset &);                                   // Copy Constructor
     ~VectorDataset();                                                       // Destructor
     int getDatasetSize() const;                                             // Access size of dataset
-    void setDatsetSize(int);                                                // Change size of dataset
+    void setDatasetSize(int);                                               // Change size of dataset
     DataVector getVector(int);                                              // Access a vector in dataset
     void setVector(int, DataVector);                                        // Change a vector in dataset
     void ReadDataset(const std::string &);                                  // Create dataset from a CSV file

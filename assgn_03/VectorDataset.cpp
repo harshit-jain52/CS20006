@@ -10,9 +10,9 @@ int VectorDataset::getDatasetSize() const
     return (int)dataset_.size();
 }
 
-void VectorDataset::setDatsetSize(int size)
+void VectorDataset::setDatasetSize(int size)
 {
-    dataset_.resize(size, 0);
+    dataset_.resize(size);
 }
 
 DataVector VectorDataset::getVector(int i)
