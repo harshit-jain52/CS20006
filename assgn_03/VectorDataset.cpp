@@ -12,7 +12,7 @@ int VectorDataset::getDatasetSize() const
 
 void VectorDataset::setDatasetSize(int size)
 {
-    dataset_.resize(size);
+    dataset_.resize(size, 0);
 }
 
 DataVector VectorDataset::getVector(int i)
@@ -35,6 +35,41 @@ void VectorDataset::setVector(int i, DataVector datav)
     dataset_[i] = datav;
 }
 
+int VectorDataset::findVector(const DataVector &datav)
+{
+    int sz = dataset_.size();
+    for (int i = 0; i < sz; i++)
+        if (dataset_[i] == datav)
+            return i;
+
+    return -1;
+}
+
+void VectorDataset::addVector(const DataVector &datav)
+{
+    if (dataset_.size() > 0 && datav.getDimension() != dataset_[0].getDimension())
+    {
+        std::cout << "addVector: Can't add vector of different dimension to the dataset" << std::endl;
+        exit(0);
+    }
+    int sz = dataset_.size();
+    dataset_.resize(sz + 1);
+    dataset_[sz] = datav;
+}
+
+bool VectorDataset::removeVector(const DataVector &datav)
+{
+    int idx = findVector(datav);
+    if (idx == -1)
+        return false;
+
+    int sz = dataset_.size();
+    for (int i = idx; i < sz - 1; i++)
+        dataset_[i] = dataset_[i + 1];
+    dataset_.resize(sz - 1);
+
+    return true;
+}
 void VectorDataset::ReadDataset(const std::string &CSVfile)
 {
     std::ifstream input{CSVfile};

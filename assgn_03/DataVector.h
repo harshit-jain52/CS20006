@@ -24,6 +24,7 @@ DataVector class: represents a vector, containing data in the form of its coordi
 + : To add two vectors, coordinate by coordinate
 - : To subtract two vectors, coordinate by coordinate
 * : To find the dot product of two vectors
+==: To compare two vectors for equality
 << : (friend function) To print the vector coordinates, seperated by commas (facilitates writing vector into CSV file)
 */
 
@@ -35,6 +36,7 @@ private:
 
 public:
     DataVector(int = 0);                                                 // Constructor
+    DataVector(std::vector<double> &);                                   // Constructor
     DataVector(const DataVector &);                                      // Copy Constructor
     ~DataVector();                                                       // Destructor
     DataVector &operator=(const DataVector &);                           // Copy Assignment Operator
@@ -47,5 +49,6 @@ public:
     double operator*(const DataVector &);                                // Dot Product
     double norm();                                                       // Length of Vector
     double dist(const DataVector &);                                     // Distance between two Vectors
+    bool operator==(const DataVector &);                                 // Compare two Vectors
     friend std::ostream &operator<<(std::ostream &, DataVector const &); // Print Vector
 };

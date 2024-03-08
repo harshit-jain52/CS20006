@@ -1,6 +1,7 @@
 #include "DataVector.h"
 
 DataVector::DataVector(int dim) : dimension_(dim), v_(dim, 0) {}
+DataVector::DataVector(std::vector<double> &v) : dimension_(v.size()), v_(v) {}
 DataVector::DataVector(const DataVector &other) : dimension_(other.dimension_), v_(other.v_) {}
 
 DataVector::~DataVector() {}
@@ -107,6 +108,18 @@ void DataVector::setCoordinate(int i, double coord)
     }
 
     v_[i] = coord;
+}
+
+bool DataVector::operator==(const DataVector &other)
+{
+    if (dimension_ != other.dimension_)
+        return false;
+
+    for (int i = 0; i < dimension_; i++)
+        if (v_[i] != other.v_[i])
+            return false;
+
+    return true;
 }
 
 std::ostream &operator<<(std::ostream &stream, const DataVector &other)
