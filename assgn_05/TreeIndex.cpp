@@ -84,7 +84,6 @@ VectorDataset TreeIndex::SearchWrapper(const DataVector &point, int k)
     while (!pq.empty())
     {
         ANN.setVector(k - i, dataset.getVector(pq.top().second));
-        cout << pq.top().first << endl;
         pq.pop();
         i++;
     }
@@ -208,7 +207,7 @@ pair<DataVector, int> RPTreeIndex::ChooseRule(const vector<int> &ind)
     // Generate Random Vector
     vector<double> random_v(dim);
     for (int j = 0; j < dim; j++)
-        random_v[j] = 2 * ((double)rand() / RAND_MAX) - 1;
+        random_v[j] = (double)rand() / RAND_MAX;
 
     // Normalize the generated vector
     double norm = DataVector(random_v).norm();
