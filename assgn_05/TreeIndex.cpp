@@ -207,7 +207,7 @@ pair<DataVector, int> RPTreeIndex::ChooseRule(const vector<int> &ind)
     // Generate Random Vector
     vector<double> random_v(dim);
     for (int j = 0; j < dim; j++)
-        random_v[j] = (2 * (double)rand() - 1) / RAND_MAX;
+        random_v[j] = (double)rand() / RAND_MAX;
 
     // Normalize the generated vector
     double norm = DataVector(random_v).norm();
